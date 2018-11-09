@@ -22,8 +22,22 @@
 <script src="<%=request.getContextPath() %>/js/jquery-1.7.2.min.js"></script>
 <script>
     function saveCart(){
+        $("#tjshlInp").val($("#NumInp").val());
+
         $("#addCartForm").submit()
     }
+    function changeNum(flag){
+        var numObj = $("#NumInp");
+        if(flag==1){
+            numObj.val(parseInt(numObj.val())+1)
+        }else if(flag==2){
+            if(numObj.val>1){
+                numObj.val(numObj.val()-1)
+            }
+
+        }
+    }
+
 </script>
 <body>
 
@@ -78,16 +92,16 @@
             <div class="clear" style="margin-top:20px;">
                 <div class="min_t" style="line-height:36px">数量：</div>
                 <div class="num_box">
-                    <input type="text" name="num" value="1" style="width:40px;height:32px;text-align:center;float:left">
+                    <input type="text" name="num" id="NumInp" value="1" style="width:40px;height:32px;text-align:center;float:left">
                     <div class="rg">
-                        <img src="images/jia.jpg" id='jia' alt="">
-                        <img src="images/jian.jpg" id='jian' alt="">
+                        <img src="images/jia.jpg" onclick="changeNum(1)" id='jia' alt="">
+                        <img src="images/jian.jpg" onclick="changeNum(2)" id='jian' alt="">
                     </div>
                 </div>
             </div>
             <div class="clear" style="margin-top:20px;">
-                <img src="images/mai.jpg" alt="">
-                <img src="images/shop.jpg" onclick="saveCart()" alt="">
+                <img src="images/mai.jpg"  alt="">
+                <img src="images/shop.jpg"  onclick="saveCart()" alt="">
             </div>
         </div>
     </div>
@@ -111,8 +125,8 @@
     <input type="text" name="skuJg" value="${itemvo.jg}">
     <input type="text" name="shpId" value="${itemvo.shpId}">
     <input type="text" name="skuId" value="${itemvo.id}">
-    <input type="text" name="tjshl" value="1">
-    <input type="text" name="hj" value="${itemvo.jg}">
+    <input type="text" name="tjshl" value="1" id="tjshlInp">
+   <%--<input type="text" name="hj" value="${itemvo.jg}">--%>
     <input type="text" name="shpTp" value="${itemvo.imgList.get(0).url}">
     <input type="text" name="shfxz" value="1">
     <input type="text" name="kcdz" value="${itemvo.kcdz}">

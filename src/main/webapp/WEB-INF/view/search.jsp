@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="card" onmouseover="findMiniCart()" onmouseout="outMiniCart()">
-            <a href="">购物车<div class="num">0</div></a>
+            <a href="<%=request.getContextPath() %>/toCartListPage.do">购物车<div class="num">0</div></a>
             <!--购物车商品-->
             <div class="cart_pro">
                <!-- <h6>最新加入的商品</h6>-->
