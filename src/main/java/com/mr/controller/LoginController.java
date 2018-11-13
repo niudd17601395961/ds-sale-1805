@@ -35,7 +35,8 @@ public class LoginController {
     private RedisTemplate redisTemplate;
 
     @RequestMapping("selectLogin")
-    public String selectLogin(String userName, String password, HttpSession session, HttpServletRequest request, HttpServletResponse response,
+    public String selectLogin(String userName, String password, HttpSession session,
+                              String loginSuccessUrl,HttpServletRequest request, HttpServletResponse response,
                               @CookieValue(value="cookieCartList",required = false) String cookieCartList) {
         TMallUserAccount user = userService.selectLogin(userName, password);
         if (user == null) {
@@ -66,37 +67,27 @@ public class LoginController {
                         Map<String, Object> cartMap = new HashMap<String,Object>();
                         cartMap.put("skuId",cartListCookie.get(i).getSkuId());
                         cartMap.put("userId",user.getId());
-
                         //修改对象的数量
                         cartMap.put("tjshl",cartListCookie.get(i).getTjshl()+cart.getTjshl());
-
                        //BigDecimal jg = new BigDecimal(cartListCookie.get(i).getSkuJg() + "");
                         //BigDecimal shl = new BigDecimal(cartListCookie.get(i).getTjshl()+cart.getTjshl());
-
                         cartMap.put("hj",CartController.getHj(cartListCookie.get(i)));
-
                         cartService.updateCartBySkuIdAndUserId(cartMap);
-
                     }else{//添加当前对象
                         cartListCookie.get(i).setYhId(user.getId());
                        cartService.saveCart(cartListCookie.get(i));
-
                     }
                 }
-
                 //cartService.saveCartList(cartListCookie,user.getId());
                 //清空cookie中的购物车
                 MyCookieUtils.deleteCookie(request,response,"cookieCartList");
                 //清空redis购物车
                 redisTemplate.delete("cookieCartList"+user.getId());
             }
-
-
-
-
-
+            if(!StringUtils.isBlank(loginSuccessUrl)){
+                return "redirect:"+loginSuccessUrl+".do";
+            }
             return "redirect:toMainPage.do";
-
         }
     }
     //注销

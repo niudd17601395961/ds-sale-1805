@@ -50,6 +50,7 @@
         </div>
         <div class="blank_01"></div>
         <form action="selectLogin.do" id="login_form" method="post">
+            <input type="hidden" name="loginSuccessUrl" value="${loginSuccessUrl}">
             <div class="input1">
                 <input type="text" class="input1_01" name="userName"/>
             </div>

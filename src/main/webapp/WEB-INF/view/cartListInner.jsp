@@ -12,6 +12,11 @@
     <title>Title</title>
 </head>
 <script src="<%=request.getContextPath() %>/jquery-1.7.2.min.js"></script>
+<script>
+    function toCheckPage(){
+        location.href="<%=request.getContextPath() %>/toCheckPage.do";
+    }
+</script>
 <body>
 <div class="Cbox">
     <table class="table table-striped table-bordered table-hover">
@@ -50,7 +55,7 @@
 </div>
 <div class="Cprice">
     <div class="price">总价：${hjSum}</div>
-    <div class="jiesuan">结算</div>
+    <div class="jiesuan" onclick="toCheckPage()">结算</div>
 </div>
 </body>
 </html>

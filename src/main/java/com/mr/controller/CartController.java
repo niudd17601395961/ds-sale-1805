@@ -3,7 +3,6 @@ package com.mr.controller;
 import com.mr.model.TMallShoppingcar;
 import com.mr.model.TMallUserAccount;
 import com.mr.service.CartService;
-import com.mr.util.MyCookieUtils;
 import com.mr.util.MyJsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,7 @@ public class CartController {
 
         cart.setHj(getHj(cart));
 
-        //cookie中是以集合的形式存放数据，所以要先把对象放入集合中
+        //cookie中是以json字符串的形式存放数据，所以要先把对象放入集合中
         //定义一个集合将对象放入集合中
         List<TMallShoppingcar> cartList = new ArrayList<TMallShoppingcar>();
         //判断是否登录
@@ -131,7 +130,7 @@ public class CartController {
                             cartMap.put("skuId",cartList.get(i).getSkuId());
                             cartMap.put("userId",user.getId());
                             cartMap.put("tjshl",cartList.get(i).getTjshl() + cart.getTjshl());
-
+                            cartList.get(i).setTjshl(cartList.get(i).getTjshl() + cart.getTjshl());
                             //BigDecimal hj = new BigDecimal(cartList.get(i).getSkuJg() + "");
                             //BigDecimal tjshl = new BigDecimal(cartList.get(i).getTjshl() + "");
 
@@ -194,7 +193,7 @@ public class CartController {
         return "miniCartInner";
     }
 
-    public BigDecimal getSum( List<TMallShoppingcar> cartList){
+    public static BigDecimal getSum( List<TMallShoppingcar> cartList){
         BigDecimal sum = new BigDecimal("0");
         for (int i = 0; i < cartList.size(); i++) {
             if (cartList.get(i).getShfxz().equals("1")) {//判断是否选中进行计算金额
