@@ -27,8 +27,10 @@
         <div class="logo"><img src="./images/logo.jpg" alt=""></div>
         <div class="search_on">
             <div class="se">
-                <input type="text" name="search" class="lf">
-                <input type="submit" class="clik" value="搜索">
+                <form action="listSkuBySolr.do" method="get">
+                    <input type="text" name="key" class="lf">
+                    <input type="submit" class="clik" value="搜索">
+                </form>
             </div>
             <div class="se">
                 <a href="">取暖神奇</a>

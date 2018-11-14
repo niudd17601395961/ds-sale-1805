@@ -21,9 +21,10 @@
         }
     </script>
 </head>
+<script src="<%=request.getContextPath() %>/js/jquery-1.7.2.min.js"></script>
 <body>
-    <div class="Sbox">
 
+   <div class="Sbox">
         <c:forEach items="${skuList}" var="sku">
             <div class="list">
                 <div class="img">

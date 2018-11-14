@@ -82,4 +82,18 @@ public class TMallSku {
     public void setKcdz(String kcdz) {
         this.kcdz = kcdz == null ? null : kcdz.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TMallSku{" +
+                "id=" + id +
+                ", shpId=" + shpId +
+                ", kc=" + kc +
+                ", jg=" + jg +
+                ", chjshj=" + chjshj +
+                ", skuMch='" + skuMch + '\'' +
+                ", skuXl=" + skuXl +
+                ", kcdz='" + kcdz + '\'' +
+                '}';
+    }
 }

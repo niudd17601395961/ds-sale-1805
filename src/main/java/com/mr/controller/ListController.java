@@ -2,15 +2,21 @@ package com.mr.controller;
 
 import com.mr.model.OBJECTSku;
 import com.mr.model.OBJECTTMallAttr;
+import com.mr.model.TMallSku;
 import com.mr.model.TMallSkuAttrValueVO;
 import com.mr.service.AttrService;
 import com.mr.service.SkuService;
+import com.mr.util.MyHttpClientUtil;
+import com.mr.util.MyJsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yaodd on 2018/11/6.
@@ -52,4 +58,15 @@ public class ListController {
         return "list-sbox";
     }
 
+
+    @RequestMapping("listSkuBySolr")
+    public String listSkuBySolr(String key,ModelMap map){
+        //需要调用solr接口
+        Map<String,String> keyMap=new HashMap<String,String>();
+        keyMap.put("key",key);
+        String skuJson = MyHttpClientUtil.doGet("http://localhost:8181/querySkuBySolr.do", keyMap);
+        List<TMallSku> skuList = MyJsonUtil.jsonToList(skuJson, TMallSku.class);
+        map.put("skuList",skuList);
+        return "list";
+    }
 }
